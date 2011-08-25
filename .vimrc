@@ -109,5 +109,6 @@ map <C-Right> <ESC>:tabnext<CR>
 map <C-Left> <ESC>:tabprev<CR>
 map <C-t> <ESC>:tabnew<CR>
 
-noremap <leader>n :NERDTree<CR>
-nnoremap <F5> :GundoToggle<CR>
+nnoremap <leader>n :NERDTree<CR>
+nnoremap <F5> <Esc>:GundoToggle<CR>
+nnoremap <leader>m :set paste!<CR>i
