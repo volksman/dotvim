@@ -110,3 +110,4 @@ map <C-Left> <ESC>:tabprev<CR>
 map <C-t> <ESC>:tabnew<CR>
 
 noremap <leader>n :NERDTree<CR>
+nnoremap <F5> :GundoToggle<CR>
