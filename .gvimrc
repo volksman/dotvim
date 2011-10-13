@@ -8,7 +8,11 @@ colorscheme mustang
 set anti
 " Save when losing focus "
 au FocusLost * :wa
-set guifont=Monaco:h12
+if has("gui_macvim")
+    set guifont=Monaco:h12
+else
+    set guifont=Monaco\ 9
+endif
 
 "vim gist config(specifically for OSX)
 let g:gist_clip_command = 'pbcopy'
@@ -20,6 +24,7 @@ if has("gui_macvim")
 endif
 
 "Add the virtualenv's site-packages to vim path(if you are in a virtualenv)
+if has("gui_macvim")
 py << EOF
 import os.path
 import sys
@@ -30,3 +35,4 @@ if 'VIRTUAL_ENV' in os.environ:
     activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
     execfile(activate_this, dict(__file__=activate_this))
 EOF
+endif
