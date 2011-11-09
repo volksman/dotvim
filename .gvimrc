@@ -4,6 +4,8 @@ set colorcolumn=81 "to help us keep our lines under 80 chars
 set go-=T
 set columns=185
 set cursorline
+set ttyfast
+set lazyredraw
 colorscheme mustang
 set anti
 " Save when losing focus "
@@ -36,3 +38,6 @@ if 'VIRTUAL_ENV' in os.environ:
     execfile(activate_this, dict(__file__=activate_this))
 EOF
 endif
+
+nnoremap <S-Insert> <ESC>"+gP
+nnoremap <C-Insert> <ESC>"+y
