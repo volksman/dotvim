@@ -112,3 +112,5 @@ map <C-t> <ESC>:tabnew<CR>
 nnoremap <leader>n :NERDTree<CR>
 nnoremap <F5> <Esc>:GundoToggle<CR>
 nnoremap <leader>m :set paste!<CR>i
+
+vmap st "zdi{% trans '<C-R>z' %}<ESC>
