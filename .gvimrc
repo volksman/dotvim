@@ -1,8 +1,9 @@
-set nowrap
+set wrap
 set colorcolumn=81 "to help us keep our lines under 80 chars
 
 set go-=T
 set columns=185
+set lines=60
 set cursorline
 set ttyfast
 set lazyredraw
