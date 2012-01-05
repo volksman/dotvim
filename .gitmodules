@@ -28,3 +28,6 @@
 [submodule ".vim/bundle/obsidian"]
 	path = .vim/bundle/obsidian
 	url = https://github.com/dbb/themes.git
+[submodule ".vim/bundle/snipmate"]
+	path = .vim/bundle/snipmate
+	url = https://github.com/msanders/snipmate.vim.git

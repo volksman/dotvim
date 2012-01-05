@@ -8,7 +8,7 @@ set nocompatible
 set number
 set numberwidth=5
 set encoding=utf8
-set smartindent
+"set smartindent
 set showmatch
 set vb t_vb=
 set incsearch
