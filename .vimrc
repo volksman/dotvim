@@ -60,9 +60,6 @@ set completeopt=menuone,longest,preview
 autocmd FileType python set ft=python.django " For SnipMate
 autocmd FileType html set ft=htmldjango.html " For SnipMate"
 
-" Don't let pyflakes use the quickfix window
-let g:pyflakes_use_quickfix = 0
-
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
