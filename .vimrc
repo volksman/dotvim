@@ -83,6 +83,7 @@ let NERDTreeWinSize=25
 " Python.vim config
 let python_highlight_all = 1
 let python_slow_sync = 1
+let g:pymode_folding = 0
 
 "status line
 set laststatus=2
