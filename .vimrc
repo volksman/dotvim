@@ -1,42 +1,66 @@
+" Default to act like vim, not vi
+set nocompatible
+" don't wrap lines
+set nowrap
+" Colorscheme
+set background=dark
+colorscheme mustang
+" Turn on line numbers
+set number
+set numberwidth=4
+set backspace=indent,eol,start  "Allow backspace in insert mode
+set showcmd                     "Show incomplete cmds down the bottom
+set showmode                    "Show current mode down the bottom
+set hidden                      "Allow current buffer to be put in background
+                                "without being written to disk
+" utf8 incoding
+set encoding=utf8
+" smart indentation overriden by individual filetype settings
+set smartindent
+" show matching braces, brackets and such
+set showmatch
+" Turn off beeping and visual bells
+set vb t_vb=
+" incremental search
+set incsearch
+" show status line even when only one window is shown.
+set ls=2
+" show the current position (line+col) and percentage in buffer
+set ruler
+" don't distinguish between caps in search
+set ignorecase
+" set window title
+set title
+" fast terminal connection
+set ttyfast
+"turn on list characters
+set list
+"keep an extra long history
+set history=1000
+"set up tabs and indentation, default to 4 space tabs. We don't actually use
+"tabs here. This is overwritten in individual syntax files
+set shiftwidth=4
+set tabstop=4
+syntax on "syntax highlighting
+"store temp files in non-annoying place
+set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
+set undodir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp     " undo files
+set backup                        " enable backups
+
+set colorcolumn=81 "to help us keep our lines under 80 chars
+set cursorline
+"While typing a search command, show where the pattern matches
+setlocal incsearch
+"When there is a previous search pattern, highlight all its matches
+setlocal hlsearch
+"turn on pathogen
 call pathogen#runtime_append_all_bundles()
 call pathogen#helptags()
 
-set hidden
-set history=1000
-set background=dark
-set nocompatible
-set number
-set numberwidth=5
-set encoding=utf8
-"set smartindent
-set showmatch
-set vb t_vb=
-set incsearch
-set ls=2
-set ruler
-set ignorecase
-set title
-set ttyfast
-set list
-set visualbell
-
-nnoremap ' `
-nnoremap ` '
-
-let mapleader = ","
-
-set backupdir=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-set directory=~/.vim-tmp,~/.tmp,~/tmp,/var/tmp,/tmp
-
-setlocal incsearch
-setlocal hlsearch
-
-set shiftwidth=4
-set tabstop=4
-set expandtab
-
+" Enable file type detection
 filetype plugin indent on
-
+" Syntax of these languages are fussy over tabs Vs spaces
 au FileType yaml setlocal ts=2 sts=2 sw=2 expandtab
 "Customisations based on personal preferences
 au FileType html setlocal ts=2 sts=2 sw=2 noexpandtab
@@ -48,34 +72,48 @@ au BufNewFile,BufRead *.rss setfiletype xml
 au BufWritePre * :%s/\s\+$//e
 "Autocomplete
 
+"python autocomplete
 au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
 set completeopt=menuone,longest,preview
-
-"python autocomplete with supertab
-au FileType python set omnifunc=pythoncomplete#Complete
-let g:SuperTabDefaultCompletionType = "context"
-set completeopt=menuone,longest,preview
-
-autocmd FileType python set ft=python.django " For SnipMate
-autocmd FileType html set ft=htmldjango.html " For SnipMate"
 
 au FileType javascript set omnifunc=javascriptcomplete#CompleteJS
 au FileType html set omnifunc=htmlcomplete#CompleteTags
 au FileType css set omnifunc=csscomplete#CompleteCSS
 "enable django template syntax highlighting automatically
 au BufRead,BufNewFile *.html setlocal filetype=htmldjango
-
 au FileType htmldjango setlocal ts=2 sts=2 sw=2 noexpandtab
+
+"django/python settings
+augroup ft_django
+    au!
+
+    au BufNewFile,BufRead urls.py           normal! zR
+    au BufNewFile,BufRead dashboard.py      normal! zR
+    au BufNewFile,BufRead local_settings.py normal! zR
+
+    au BufNewFile,BufRead admin.py     setlocal filetype=python.django
+    au BufNewFile,BufRead urls.py      setlocal filetype=python.django
+    au BufNewFile,BufRead models.py    setlocal filetype=python.django
+    au BufNewFile,BufRead views.py     setlocal filetype=python.django
+    au BufNewFile,BufRead settings.py  setlocal filetype=python.django
+    au BufNewFile,BufRead settings.py  setlocal foldmethod=marker
+    au BufNewFile,BufRead forms.py     setlocal filetype=python.django
+	au BufNewFile,BufRead tests.py     setlocal filetype=python.django
+augroup END
 
 "everytime I save, source the vimrc
 au bufwritepost .vimrc source $MYVIMRC
 
+au BufNewFile,BufRead *.j2 setlocal filetype=htmljinja
+
+" NERD_tree config
 let NERDTreeChDirMode=2
 let NERDTreeIgnore=['\.vim$', '\~$', '\.pyc$', '\.swp$']
 let NERDTreeSortOrder=['^__\.py$', '\/$', '*', '\.swp$',  '\.bak$', '\~$']
 let NERDTreeShowBookmarks=1
 let NERDTreeWinSize=25
+"autocmd vimenter * NERDTree
+"autocmd vimenter * if !argc() | NERDTree | endif
 
 " Python.vim config
 let python_highlight_all = 1
@@ -84,34 +122,77 @@ let g:pymode_folding = 0
 
 "status line
 set laststatus=2
-set statusline=%{fugitive#statusline()}\ %F%m%r%h%w\ [fmt=%{&ff}]\ [type=%Y]\ [pos=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+set statusline=%{fugitive#statusline()}\ %F%m%r%h%w\ ifmt=%{&ff}]\ [type=%Y]\ [pos=%l,%v][%p%%]\ %{strftime(\"%d/%m/%y\ -\ %H:%M\")}
+
 
 " Use the same symbols as TextMate for tabstops and EOLs
 set listchars=tab:▸\ ,eol:¬
+" Turn off file characters on statusline
+let g:Powerline_symbols = 'fancy'
 
 let g:html_indent_tags = 'li\|p'
 
-cmap w!! w !sudo tee %
-
+"TabBar settings
 let g:tagbar_usearrows = 1
-nnoremap <leader>l :TagbarToggle<CR>
+nmap <F8> :TagbarToggle<CR>
 
-map <A-1> 1gt
-map <A-2> 2gt
-map <A-3> 3gt
-map <A-4> 4gt
-map <A-5> 5gt
-map <A-6> 6gt
-map <A-7> 7gt
-map <A-8> 8gt
-map <A-9> 9gt
+"CtrlP Settings
+" Set the max files
+let g:ctrlp_max_files = 10000
+" Find nearest ancestor that contains source control files.
+let g:ctrlp_working_path_mode = 2
+let g:ctrlp_root_markers = ['.git/']
+" Optimize file searching
+if has("unix")
+    let g:ctrlp_user_command = {
+                \   'types': {
+                \       1: ['.git/', 'cd %s && git ls-files']
+                \   },
+                \   'fallback': 'find %s -type f | head -' . g:ctrlp_max_files
+                \ }
+endif
 
-map <C-Right> <ESC>:tabnext<CR>
-map <C-Left> <ESC>:tabprev<CR>
-map <C-t> <ESC>:tabnew<CR>
+set wildignore+=*/tmp/*,*.so,*.swp,*.zip,.git,.hg/,.svn/
+
+"supertab settings
+let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
+
+" virtualenv settings
+"Add the virtualenv's site-packages to vim path(if you are in a virtualenv)
+py << EOF
+import os.path
+import sys
+import vim
+if 'VIRTUAL_ENV' in os.environ:
+    project_base_dir = os.environ['VIRTUAL_ENV']
+    sys.path.insert(0, project_base_dir)
+    activate_this = os.path.join(project_base_dir, 'bin/activate_this.py')
+    execfile(activate_this, dict(__file__=activate_this))
+EOF
+
+"mappings
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"map <leader>
+let mapleader = ","
+" Shortcut to rapidly toggle `set list`
+nmap <leader>l :set list!<CR>
+"clear search matches
+noremap <leader><space> :noh<cr>:call clearmatches()<cr>
+"control up down to change between buffers
+noremap <C-Down> <C-W>j
+noremap <C-Up> <C-W>k
+"changes the buffer in the current window to the next or the previous one
+noremap <C-right> <ESC>:bn<CR>
+noremap <C-left> <ESC>:bp<CR>
+"oops? forgot to sudo? w!!
+cmap w!! w !sudo tee %
+"<Esc> to jj
+imap jj <Esc>
+"Ack searching
+nmap <leader>a <Esc>:Ack!
 
 nnoremap <leader>n :NERDTree<CR>
-nnoremap <F5> <Esc>:GundoToggle<CR>
 nnoremap <leader>m :set paste!<CR>i
 
-vmap st "zdi{% trans '<C-R>z' %}<ESC>
+nmap <leader>pd :setlocal ft=python.django<CR>
+nmap <leader>hd :setlocal ft=htmldjango<CR>
