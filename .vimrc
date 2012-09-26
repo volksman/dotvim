@@ -119,6 +119,7 @@ let NERDTreeWinSize=25
 let python_highlight_all = 1
 let python_slow_sync = 1
 let g:pymode_folding = 0
+let g:pymode_lint_cwindow = 0
 
 "status line
 set laststatus=2
@@ -186,6 +187,8 @@ noremap <C-right> <ESC>:bn<CR>
 noremap <C-left> <ESC>:bp<CR>
 "oops? forgot to sudo? w!!
 cmap w!! w !sudo tee %
+nmap <leader>ev :vsplit $MYVIMRC<cr>         " mapping to edit my vimrc quickly
+nmap <leader>sv :source $MYVIMRC<cr>         " mapping to source my vimrc quickly
 "<Esc> to jj
 imap jj <Esc>
 "Ack searching
