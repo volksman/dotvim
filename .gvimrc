@@ -19,3 +19,4 @@ let g:gist_detect_filetype = 1
 
 nnoremap <S-Insert> <ESC>"+gP
 nnoremap <C-Insert> <ESC>"+y
+highlight LineNr guibg=black
