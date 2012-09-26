@@ -4,7 +4,7 @@ set nocompatible
 set nowrap
 " Colorscheme
 set background=dark
-colorscheme mustang
+colorscheme Tomorrow-Night-Bright
 " Turn on line numbers
 set number
 set numberwidth=4
@@ -196,3 +196,4 @@ nnoremap <leader>m :set paste!<CR>i
 
 nmap <leader>pd :setlocal ft=python.django<CR>
 nmap <leader>hd :setlocal ft=htmldjango<CR>
+highlight LineNr guibg=black
