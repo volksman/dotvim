@@ -160,7 +160,7 @@ let g:SuperTabDefaultCompletionType = "<c-x><c-o>"
 
 " virtualenv settings
 "Add the virtualenv's site-packages to vim path(if you are in a virtualenv)
-py << EOF
+py3 << EOF
 import os.path
 import sys
 import vim
